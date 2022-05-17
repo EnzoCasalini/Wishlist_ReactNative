@@ -35,7 +35,7 @@ const WishesList: (props: WishesProps) => JSX.Element[] = (props: WishesProps) =
     return (
         props.wishes.map((wish => {
             return(
-                <View style={styles.wishContainer}>
+                <View style={styles.wishContainer} key={wish.id}>
                     <Image
                         source={{
                             uri: wish.icon,

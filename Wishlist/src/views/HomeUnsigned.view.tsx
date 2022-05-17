@@ -25,48 +25,56 @@ const HomeUnsignedView = ({navigation}): React.ReactElement => {
 
     let wish: Wish[] = [
         {
+            id: 1,
             name: "Test super méga long je suis chiant",
             icon: 'https://via.placeholder.com/300/09f/fff.png',
             description: 'Bonjour je suis agaçant et je décide donc d\'écrire énormément sans raison valable',
             url: 'osef',
         },
         {
+            id: 2,
             name: "Armoire Darty",
             icon: 'https://via.placeholder.com/300/09f/fff.png',
             description: 'Armoire de haute qualité',
             url: 'osef',
         },
         {
+            id: 3,
             name: "Test",
             icon: 'https://via.placeholder.com/300/09f/fff.png',
             description: 'Frigo nouvelle génération',
             url: 'osef',
         },
         {
+            id: 4,
             name: "Test",
             icon: 'https://via.placeholder.com/300/09f/fff.png',
             description: 'Frigo nouvelle génération',
             url: 'osef',
         },
         {
+            id: 5,
             name: "Test",
             icon: 'https://via.placeholder.com/300/09f/fff.png',
             description: 'Frigo nouvelle génération',
             url: 'osef',
         },
         {
+            id: 6,
             name: "Test",
             icon: 'https://via.placeholder.com/300/09f/fff.png',
             description: 'Frigo nouvelle génération',
             url: 'osef',
         },
         {
+            id: 7,
             name: "Test",
             icon: 'https://via.placeholder.com/300/09f/fff.png',
             description: 'Frigo nouvelle génération',
             url: 'osef',
         },
         {
+            id: 8,
             name: "Test",
             icon: 'https://via.placeholder.com/300/09f/fff.png',
             description: 'Frigo nouvelle génération',
