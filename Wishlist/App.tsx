@@ -1,30 +1,42 @@
-import {StatusBar} from 'expo-status-bar';
-import {StyleSheet, Text, View} from 'react-native';
-import {NavigationContainer} from "@react-navigation/native";
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import ProfileView from "./src/views/Profile";
+import FriendListView from "./src/views/FriendList.view";
+import 'react-native-gesture-handler';
 
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import SignInView from "./src/views/SignIn.view";
-import SignUpView from "./src/views/SignUp.view";
+function Feed() {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Feed Screen</Text>
+        </View>
+    );
+}
 
-import HomeUnsignedView from "./src/views/HomeUnsigned.view";
-import HomeSigned from "./src/views/HomeSigned";
+function Article() {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Article Screen</Text>
+        </View>
+    );
+}
 
-const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
+function MyDrawer() {
+    return (
+        <Drawer.Navigator useLegacyImplementation>
+            <Drawer.Screen name="Profile" component={ProfileView} />
+            <Drawer.Screen name="FriendList" component={FriendListView} />
+        </Drawer.Navigator>
+    );
+}
 
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="SignIn"
-                             screenOptions={{
-                                 headerShown: false
-                             }}
-            >
-                <Stack.Screen name="SignIn" component={SignInView}/>
-                <Stack.Screen name="SignUp" component={SignUpView}/>
-                <Stack.Screen name="Profile" component={HomeSigned} />
-                <Stack.Screen name="HomeUnsigned" component={HomeUnsignedView}/>
-            </Stack.Navigator>
+            <MyDrawer />
         </NavigationContainer>
     );
 }
