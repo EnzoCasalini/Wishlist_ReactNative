@@ -61,6 +61,10 @@ const SignInView = ({navigation}): React.ReactElement => {
                 >
                     <Text style={styles.OutlineText}>Register</Text>
                 </TouchableOpacity>
+                <Text style={styles.link}
+                      onPress={() => { navigation.navigate('HomeUnsigned')}}>
+                    →  Accéder sans être connecté
+                </Text>
             </View>
         </KeyboardAvoidingView>
     )
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
         width: '60%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 90,
+        marginTop: 50,
     },
     button: {
         backgroundColor: '#992DF2',
@@ -119,6 +123,10 @@ const styles = StyleSheet.create({
         color: '#992DF2',
         fontWeight: '700',
         fontSize: 16,
+    },
+    link: {
+        color: 'blue',
+        marginTop: 20,
     }
 
 });
