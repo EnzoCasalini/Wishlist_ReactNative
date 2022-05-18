@@ -11,7 +11,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 
-const Profile = ({navigation}): React.ReactElement => {
+const HomeSignedView = ({navigation}): React.ReactElement => {
 
     return (
         <KeyboardAvoidingView
@@ -179,4 +179,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Profile;
+export default HomeSignedView;
