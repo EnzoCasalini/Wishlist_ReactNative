@@ -50,7 +50,7 @@ const SignInView = ({navigation}): React.ReactElement => {
 
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                    onPress={() => { }}
+                    onPress={() => { navigation.navigate('Profile') }}
                     style={styles.button}
                 >
                     <Text style={styles.buttonText}>Login</Text>
