@@ -55,26 +55,6 @@ const FriendListView = ({navigation}): React.ReactElement => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#992DF2',
-    },
-    friendContainer: {
-        width: '100%',
-        marginTop: 150,
-        display: "flex",
-        alignItems: "center",
-    },
-    title: {
-        marginTop: 50,
-        marginLeft: '6%',
-        fontSize: 24,
-        fontWeight: "bold",
-    },
-    wishesContainer: {
-        width: '100%',
-        display: "flex",
-        alignItems: "center",
-    },
 });
 
 

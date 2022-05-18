@@ -47,11 +47,7 @@ const ProfileView = ({navigation}): React.ReactElement => {
         >
             <ScrollView>
                 <View style={styles.friendContainer}>
-                    <Contact name={user.name} icon={user.icon} status={user.status}/>
-                </View>
-                <Text style={styles.title}>Wishes </Text>
-                <View style={styles.wishesContainer}>
-                    <WishesList wishes={wish}/>
+                    <Text style={styles.title}>Profile</Text>
                 </View>
             </ScrollView>
         </KeyboardAvoidingView>
@@ -59,26 +55,6 @@ const ProfileView = ({navigation}): React.ReactElement => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#992DF2',
-    },
-    friendContainer: {
-        width: '100%',
-        marginTop: 150,
-        display: "flex",
-        alignItems: "center",
-    },
-    title: {
-        marginTop: 50,
-        marginLeft: '6%',
-        fontSize: 24,
-        fontWeight: "bold",
-    },
-    wishesContainer: {
-        width: '100%',
-        display: "flex",
-        alignItems: "center",
-    },
 });
 
 
