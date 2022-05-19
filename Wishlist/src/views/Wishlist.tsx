@@ -15,7 +15,7 @@ import WishesList from "../Component/WishesList";
 import {Wish} from "../bdd/Wish";
 
 
-const ProfileView = ({navigation}): React.ReactElement => {
+const Wishlist = ({navigation}): React.ReactElement => {
 
     const user = {
         name: 'Enzo Casalini',
@@ -58,4 +58,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default ProfileView;
+export default Wishlist;
