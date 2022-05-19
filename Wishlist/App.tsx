@@ -3,12 +3,12 @@ import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import ProfileView from "./src/views/Profile";
+import ProfileView from "./src/views/Profile.view";
 import FriendListView from "./src/views/FriendList.view";
 import 'react-native-gesture-handler';
 import SignInView from "./src/views/SignIn.view";
 import SignUpView from "./src/views/SignUp.view";
-import HomeSignedView from "./src/views/HomeSigned";
+import HomeSignedView from "./src/views/HomeSigned.view";
 
 
 const Drawer = createDrawerNavigator();

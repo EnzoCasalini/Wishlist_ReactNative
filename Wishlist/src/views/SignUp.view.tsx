@@ -9,7 +9,9 @@ import {
     Image,
     KeyboardAvoidingView, TouchableOpacity
 } from "react-native";
-import React from "react";
+import React, {useEffect} from "react";
+import {authentication} from "../../firebase/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 
 const SignUpView = ({navigation}): React.ReactElement => {
@@ -17,6 +19,19 @@ const SignUpView = ({navigation}): React.ReactElement => {
     const [mail, setMail] = React.useState("");
     const [pwd, setPwd] = React.useState("");
     const [confirmPwd, setConfirmPwd] = React.useState("");
+    const [isSigned, setIsSigned] = React.useState<boolean>(false);
+
+
+    const handleSignUp = () =>  {
+        createUserWithEmailAndPassword(authentication, mail, pwd)
+        .then((re) => {
+            setIsSigned(true);
+            console.log(re);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
 
 
     return (
@@ -59,7 +74,7 @@ const SignUpView = ({navigation}): React.ReactElement => {
 
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                    onPress={() => { navigation.navigate('SignUp') }}
+                    onPress={handleSignUp}
                     style={styles.button}
                 >
                     <Text style={styles.buttonText}>Register</Text>

@@ -19,7 +19,7 @@ const HomeSignedView = ({navigation}): React.ReactElement => {
             style={styles.container}
         >
             <View>
-                <Text style={styles.title}>My events</Text>
+                <Text style={styles.title}>My eventss</Text>
             </View>
             <View>
                 <ScrollView
