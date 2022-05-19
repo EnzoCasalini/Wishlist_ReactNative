@@ -2,6 +2,8 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import {createDrawerNavigator, DrawerContentScrollView, DrawerItem, DrawerItemList} from '@react-navigation/drawer';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
+
+import ProfileView from "./src/views/Profile.view";
 import Wishlist from "./src/views/Wishlist";
 import FriendListView from "./src/views/FriendList.view";
 import 'react-native-gesture-handler';

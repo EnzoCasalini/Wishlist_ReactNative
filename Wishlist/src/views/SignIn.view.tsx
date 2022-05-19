@@ -3,19 +3,45 @@ import {
     Text,
     StyleSheet,
     TextInput,
-    Button,
-    Alert,
-    SafeAreaView,
     Image,
     KeyboardAvoidingView, TouchableOpacity
 } from "react-native";
-import React from "react";
+import React, {useEffect} from "react";
+import {authentication} from "../../firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 
 const SignInView = ({navigation}): React.ReactElement => {
 
     const [mail, setMail] = React.useState("");
     const [pwd, setPwd] = React.useState("");
+    const [isSigned, setIsSigned] = React.useState(false);
+
+
+    useEffect(() => {
+        authentication.onAuthStateChanged(user => {
+            if (user) {
+                navigation.navigate('HomeSigned');
+            }
+        })
+    }, [])
+
+
+    const handleSignIn = () =>  {
+        signInWithEmailAndPassword(authentication, mail, pwd)
+            .then((re) => {
+                setIsSigned(true);
+                if (isSigned)
+                {
+                    navigation.navigate('HomeSigned');
+                    setPwd("");
+                    setMail("");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
 
 
     return (
@@ -50,7 +76,7 @@ const SignInView = ({navigation}): React.ReactElement => {
 
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                    onPress={() => { navigation.navigate('HomeSigned') }}
+                    onPress={handleSignIn}
                     style={styles.button}
                 >
                     <Text style={styles.buttonText}>Login</Text>
@@ -61,10 +87,6 @@ const SignInView = ({navigation}): React.ReactElement => {
                 >
                     <Text style={styles.OutlineText}>Register</Text>
                 </TouchableOpacity>
-                <Text style={styles.link}
-                      onPress={() => { navigation.navigate('HomeUnsigned')}}>
-                    →  Accéder sans être connecté
-                </Text>
             </View>
         </KeyboardAvoidingView>
     )
