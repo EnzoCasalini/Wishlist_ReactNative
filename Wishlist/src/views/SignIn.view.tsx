@@ -18,13 +18,14 @@ const SignInView = ({navigation}): React.ReactElement => {
     const [isSigned, setIsSigned] = React.useState(false);
 
 
-    useEffect(() => {
-        authentication.onAuthStateChanged(user => {
-            if (user) {
-                navigation.navigate('HomeSigned');
-            }
-        })
-    }, [])
+    // Connexion automatique si déjà log.
+    // useEffect(() => {
+    //     authentication.onAuthStateChanged(user => {
+    //         if (user) {
+    //             navigation.navigate('HomeSigned');
+    //         }
+    //     })
+    // }, [])
 
 
     const handleSignIn = () =>  {

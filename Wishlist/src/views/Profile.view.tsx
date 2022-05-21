@@ -16,9 +16,6 @@ import {authentication} from "../../firebase/firebase";
 
 const ProfileView = ({navigation}): React.ReactElement => {
 
-
-
-
     return (
         <KeyboardAvoidingView
             style={styles.container}

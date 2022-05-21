@@ -12,7 +12,7 @@ import {
 import React, { useEffect } from "react";
 import { authentication, db } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { ref, set } from "firebase/database";
+import { collection, addDoc } from "firebase/firestore";
 
 const SignUpView = ({navigation}): React.ReactElement => {
 
@@ -22,8 +22,8 @@ const SignUpView = ({navigation}): React.ReactElement => {
     const [confirmPwd, setConfirmPwd] = React.useState("");
 
 
-    function writeUserInDatabase(user: { username: string; email: string; uid: any; profile_picture: string; }) {
-        set(ref(db, 'users/' + user.uid), {
+    async function writeUserInDatabase(user: { username: string; email: string; uid: any; profile_picture: string; }) {
+        const docRef = await addDoc(collection(db, "users"), {
             email: user.email,
             username: user.username,
             uid: user.uid,
@@ -50,8 +50,9 @@ const SignUpView = ({navigation}): React.ReactElement => {
                         uid: userAuth.user.uid,
                         profile_picture : '../../assets/PP/default_pp.jpg',
                     }
-                    writeUserInDatabase(user);
-                    navigation.navigate('SignIn');
+                    writeUserInDatabase(user).then(
+                        navigation.navigate('SignIn')
+                    );
                 })
                 .catch((error) => {
                     console.log(error);
