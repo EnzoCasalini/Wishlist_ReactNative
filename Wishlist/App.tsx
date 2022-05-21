@@ -3,8 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createDrawerNavigator, DrawerContentScrollView, DrawerItem, DrawerItemList} from '@react-navigation/drawer';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 
-import ProfileView from "./src/views/Profile.view";
-import Wishlist from "./src/views/Wishlist";
 import FriendListView from "./src/views/FriendList.view";
 import 'react-native-gesture-handler';
 import SignInView from "./src/views/SignIn.view";
@@ -12,6 +10,7 @@ import SignUpView from "./src/views/SignUp.view";
 import HomeSignedView from "./src/views/HomeSigned.view";
 import CustomDrawerContent from "./src/Component/CustomDrawerContent";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import WishlistView from "./src/views/Wishlist.view";
 
 
 const Drawer = createDrawerNavigator();
@@ -46,7 +45,7 @@ function MyDrawer() {
                                )
                            }}
             />
-            <Drawer.Screen name="Wish" component={Wishlist}
+            <Drawer.Screen name="Wish" component={WishlistView}
                            options={{
                                drawerIcon: ({color}) => (
                                    <Ionicons name={'book-outline'} size={22} color={color}/>

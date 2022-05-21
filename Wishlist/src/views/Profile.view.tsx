@@ -12,49 +12,34 @@ import {
 import React from "react";
 import {getAuth, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import {authentication} from "../../firebase/firebase";
+import Contact from "../Component/Contact";
 
 
 const ProfileView = ({navigation}): React.ReactElement => {
 
     return (
-        <KeyboardAvoidingView
-            style={styles.container}
-            behavior="padding"
-        >
-            <ScrollView>
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity
-                        onPress={handleSignOut}
-                        style={styles.button}
-                    >
-                        <Text style={styles.buttonText}>Sign out</Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
-        </KeyboardAvoidingView>
+        <ScrollView style={styles.container}>
+            <View>
+                <Text style={styles.title}>My events</Text>
+            </View>
+        </ScrollView>
     )
 };
 
 const styles = StyleSheet.create({
-    buttonContainer: {
-        width: '60%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 70,
-    },
-    button: {
-        backgroundColor: '#992DF2',
+    container: {
+        backgroundColor: '#3D3B46',
+        height: '100%',
         width: '100%',
-        padding: 15,
-        borderRadius: 10,
-        alignItems: 'center',
+        color: '#fff',
     },
-    buttonText: {
-        color: 'white',
-        fontWeight: '700',
-        fontSize: 16,
+    title: {
+        fontWeight: 'bold',
+        fontSize: 25,
+        marginLeft: 15,
+        paddingTop: 20,
+        color: '#fff',
     },
 });
-
 
 export default ProfileView;

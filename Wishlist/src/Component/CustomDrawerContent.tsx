@@ -6,8 +6,8 @@ import {
 import React, {useEffect, useState} from "react";
 import {Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import {getAuth, signOut, onAuthStateChanged} from "firebase/auth";
-import {authentication, db} from "../../firebase/firebase";
+import { getAuth, signOut } from "firebase/auth";
+import { authentication, db } from "../../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 
