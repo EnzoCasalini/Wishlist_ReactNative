@@ -12,7 +12,7 @@ import {
 import React, { useEffect } from "react";
 import { authentication, db } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 const SignUpView = ({navigation}): React.ReactElement => {
 
@@ -23,7 +23,7 @@ const SignUpView = ({navigation}): React.ReactElement => {
 
 
     async function writeUserInDatabase(user: { username: string; email: string; uid: any; profile_picture: string; }) {
-        const docRef = await addDoc(collection(db, "users"), {
+        const docRef = await setDoc(doc(db, "users", user.uid), {
             email: user.email,
             username: user.username,
             uid: user.uid,

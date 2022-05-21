@@ -8,17 +8,12 @@ import {Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View} from "
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {getAuth, signOut, onAuthStateChanged} from "firebase/auth";
 import {authentication, db} from "../../firebase/firebase";
-import { ref, onValue } from "firebase/database";
+import { doc, getDoc } from "firebase/firestore";
 
 
 export function CustomDrawerContent(props) {
 
-    const [user, setUser] = React.useState({
-        email: "",
-        profile_picture: "",
-        uid: "",
-        username: "",
-    });
+    const [user, setUser] = React.useState();
 
 
     const auth = getAuth();
@@ -31,14 +26,26 @@ export function CustomDrawerContent(props) {
     };
 
 
-    const userUid = auth.currentUser.uid;
-    const userInfos = ref(db, `users/${userUid}`);
-    onValue(userInfos, (snapshot) => {
-        const data = snapshot.val();
-        setUser(data);
-    }, {
-        onlyOnce: true,
-    });
+    // const userUid = auth.currentUser.uid;
+    // const userInfos = ref(db, `users/${userUid}`);
+    // onValue(userInfos, (snapshot) => {
+    //     const data = snapshot.val();
+    //     setUser(data);
+    // }, {
+    //     onlyOnce: true,
+    // });
+
+    const docRef = doc(db, "users", auth.currentUser.uid);
+    getDoc(docRef).then((snapshot) => {
+        if (snapshot.exists())
+        {
+            setUser(snapshot.data());
+        }
+    })
+    .catch((error) => {
+        alert(error);
+    })
+
 
     return (
         <View style={{flex: 1}}>
@@ -47,7 +54,12 @@ export function CustomDrawerContent(props) {
                 contentContainerStyle={{backgroundColor: '#545160'}}>
                 <View style={{padding: 20}}>
                     <Image source={require("../../assets/PP/default_pp.jpg")} style={styles.ProfileImage} />
-                    <Text style={styles.title}>{user.username}</Text>
+                    <Text style={styles.title}>
+                    {
+                        user != null &&
+                        user.username
+                    }
+                    </Text>
                     <Text style={styles.section}>
                         <Text style={[styles.caption, styles.paragraph]}>80</Text>
                         <Text style={styles.caption}> Following</Text>
