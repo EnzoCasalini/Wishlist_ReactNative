@@ -9,17 +9,31 @@ import {
     Image,
     KeyboardAvoidingView, TouchableOpacity
 } from "react-native";
-import React, {useEffect} from "react";
-import {authentication} from "../../firebase/firebase";
+import React, { useEffect } from "react";
+import { authentication, db } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-
+import { ref, set } from "firebase/database";
 
 const SignUpView = ({navigation}): React.ReactElement => {
 
     const [mail, setMail] = React.useState("");
+    const [name, setName] = React.useState("");
     const [pwd, setPwd] = React.useState("");
     const [confirmPwd, setConfirmPwd] = React.useState("");
 
+
+    function writeUserInDatabase(user: { username: string; email: string; uid: any; profile_picture: string; }) {
+        set(ref(db, 'users/' + user.uid), {
+            email: user.email,
+            username: user.username,
+            uid: user.uid,
+            profile_picture: user.profile_picture,
+        }).then(() => {
+            alert('data updated !');
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
 
     const handleSignUp = () =>  {
         let strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
@@ -29,9 +43,15 @@ const SignUpView = ({navigation}): React.ReactElement => {
             if (strongRegex.test(pwd))
             {
                 createUserWithEmailAndPassword(authentication, mail, pwd)
-                .then((re) => {
+                .then((userAuth) => {
+                    let user = {
+                        username: name,
+                        email: mail,
+                        uid: userAuth.user.uid,
+                        profile_picture : '../../assets/PP/default_pp.jpg',
+                    }
+                    writeUserInDatabase(user);
                     navigation.navigate('SignIn');
-                    //console.log(re);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -57,7 +77,7 @@ const SignUpView = ({navigation}): React.ReactElement => {
                 source={{
                     uri: 'https://c4.wallpaperflare.com/wallpaper/500/442/354/outrun-vaporwave-hd-wallpaper-preview.jpg',
                 }}
-                style={{width: "100%", height: 250}}
+                style={{width: "100%", height: 150}}
             />
             <Text style={styles.title}>Inscrivez-vous 📝️</Text>
             <View style={styles.inputContainer}>
@@ -66,6 +86,13 @@ const SignUpView = ({navigation}): React.ReactElement => {
                     placeholder="Email"
                     value={mail}
                     onChangeText={text => setMail(text)}
+                    style={styles.input}
+                />
+                <Text style={styles.inputText}>NAME *</Text>
+                <TextInput
+                    placeholder="Name"
+                    value={name}
+                    onChangeText={text => setName(text)}
                     style={styles.input}
                 />
                 <Text style={styles.inputText}>PASSWORD *</Text>

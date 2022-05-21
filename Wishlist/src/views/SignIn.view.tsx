@@ -33,9 +33,9 @@ const SignInView = ({navigation}): React.ReactElement => {
                 setIsSigned(true);
                 if (isSigned)
                 {
-                    navigation.navigate('HomeSigned');
                     setPwd("");
                     setMail("");
+                    navigation.navigate('HomeSigned');
                 }
             })
             .catch((error) => {

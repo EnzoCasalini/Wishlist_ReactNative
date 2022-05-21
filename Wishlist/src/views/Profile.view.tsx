@@ -16,14 +16,7 @@ import {authentication} from "../../firebase/firebase";
 
 const ProfileView = ({navigation}): React.ReactElement => {
 
-    const auth = getAuth();
-    const handleSignOut = () =>  {
-        signOut(auth).then(() => {
-            navigation.navigate('SignIn');
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
+
 
 
     return (
