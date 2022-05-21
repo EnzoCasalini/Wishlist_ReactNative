@@ -1,14 +1,5 @@
-import {
-    View,
-    Text,
-    StyleSheet,
-    TextInput,
-    Button,
-    Alert,
-    SafeAreaView,
-    Image,
-    KeyboardAvoidingView, TouchableOpacity
-} from "react-native";
+
+import { Platform, StyleSheet, Text, TouchableHighlight, TouchableOpacity, TouchableNativeFeedback, TouchableWithoutFeedback, View, Image } from 'react-native';
 import React from "react";
 
 interface ContactProps {
@@ -20,7 +11,7 @@ interface ContactProps {
 const Contact: React.FC<ContactProps> = (props: ContactProps) => {
 
     function checkStatus(status:boolean) {
-        if (status == true)
+        if (status)
         {
             return(<Text style={styles.active}>● Active</Text>)
         }
@@ -30,20 +21,19 @@ const Contact: React.FC<ContactProps> = (props: ContactProps) => {
     }
 
     return (
-        <View style={styles.friendContainer}>
-            <Image
-                source={{
-                    uri: props.icon,
-                }}
-                style={styles.icon}
-            />
-            <View style={styles.infoContainer}>
-                <Text style={styles.name}>{props.name}</Text>
-                {checkStatus(props.status)}
-            </View>
-        </View>
+            <TouchableOpacity style={styles.friendContainer}>
+                <Image
+                    source={{
+                        uri: props.icon,
+                    }}
+                    style={styles.icon}
+                />
+                <View style={styles.infoContainer}>
+                    <Text style={styles.name}>{props.name}</Text>
+                    {checkStatus(props.status)}
+                </View>
+            </TouchableOpacity>
     )
-
 };
 
 const styles = StyleSheet.create({
@@ -53,12 +43,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         height: 110,
-        width: '90%',
+        width: '95%',
         paddingLeft: 10,
-        borderRadius: 10,
+        borderRadius: 8,
         borderColor: 'black',
-        borderWidth: 2,
-        backgroundColor: '#FFE9F3',
+        marginBottom: 10,
+        backgroundColor: '#545160',
+        // Shadow
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 3,
     },
     icon: {
         width: 80,
@@ -73,16 +72,15 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 20,
-        fontWeight: "bold",
-        color: "black"
+        color: '#E5E5E5',
     },
     active: {
         fontSize: 14,
-        color: '#00AF54',
+        color: '#C9B6E9',
     },
     offline: {
         fontSize: 14,
-        color: 'grey',
+        color: '#b0b0b0',
     },
 });
 
