@@ -31,8 +31,8 @@ const Contact: React.FC<ContactProps> = (props: ContactProps) => {
     }
 
     return (
-        <View style={styles.friendContainer}>
-            <TouchableOpacity onPress={props.onPress}>
+        <View style={styles.container}>
+            <TouchableOpacity style={styles.friendContainer} onPress={props.onPress}>
                 <Image
                     source={{
                         uri: props.icon,
@@ -50,6 +50,9 @@ const Contact: React.FC<ContactProps> = (props: ContactProps) => {
 };
 
 const styles = StyleSheet.create({
+    container: {
+        width: "100%"
+    },
     friendContainer: {
         display: 'flex',
         justifyContent: "flex-start",

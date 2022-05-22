@@ -12,6 +12,7 @@ import CustomDrawerContent from "./src/Component/CustomDrawerContent";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import WishlistView from "./src/views/Wishlist.view";
 import ListView from "./src/views/List.view";
+import FriendView from "./src/views/Friend.view";
 
 
 const Drawer = createDrawerNavigator();
@@ -79,6 +80,7 @@ export default function App() {
                 <Stack.Screen name="SignUp" component={SignUpView}/>
                 <Stack.Screen name="HomeSigned" component={MyDrawer}/>
                 <Stack.Screen name="List" component={ListView}/>
+                <Stack.Screen name="Friend" component={FriendView}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

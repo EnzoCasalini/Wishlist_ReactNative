@@ -108,7 +108,7 @@ const HomeSignedView = ({navigation}): React.ReactElement => {
                             return(
                                 <Contact name={user.username} icon={'https://reactnative.dev/img/tiny_logo.png'} status={true}
                                 onPress={() => {
-                                    navigation.navigate('FriendList', {username: user.username});
+                                    navigation.navigate('Friend', {userUid: user.uid, username: user.username});
                                 }} key={user.uid}/>
                             )
                         }
