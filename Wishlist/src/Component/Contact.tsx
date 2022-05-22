@@ -15,6 +15,7 @@ interface ContactProps {
     name: string;
     icon: string;
     status: boolean;
+    onPress: () => void;
 }
 
 const Contact: React.FC<ContactProps> = (props: ContactProps) => {
@@ -31,16 +32,18 @@ const Contact: React.FC<ContactProps> = (props: ContactProps) => {
 
     return (
         <View style={styles.friendContainer}>
-            <Image
-                source={{
-                    uri: props.icon,
-                }}
-                style={styles.icon}
-            />
-            <View style={styles.infoContainer}>
-                <Text style={styles.name}>{props.name}</Text>
-                {checkStatus(props.status)}
-            </View>
+            <TouchableOpacity onPress={props.onPress}>
+                <Image
+                    source={{
+                        uri: props.icon,
+                    }}
+                    style={styles.icon}
+                />
+                <View style={styles.infoContainer}>
+                    <Text style={styles.name}>{props.name}</Text>
+                    {checkStatus(props.status)}
+                </View>
+            </TouchableOpacity>
         </View>
     )
 

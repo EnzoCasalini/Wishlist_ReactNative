@@ -14,38 +14,40 @@ import { doc, getDoc } from "firebase/firestore";
 export function CustomDrawerContent(props) {
 
     const [user, setUser] = React.useState();
+    const [isSignedOut, setIsSignedOut] = React.useState(false);
 
 
     const auth = getAuth();
     const handleSignOut = () =>  {
         signOut(auth).then(() => {
             console.log("SignedOut");
+            setIsSignedOut(true);
         }).catch((error) => {
-            console.log(error);
+            //console.log(error);
         });
     };
 
 
-    // const userUid = auth.currentUser.uid;
-    // const userInfos = ref(db, `users/${userUid}`);
-    // onValue(userInfos, (snapshot) => {
-    //     const data = snapshot.val();
-    //     setUser(data);
-    // }, {
-    //     onlyOnce: true,
-    // });
-
-    const docRef = doc(db, "users", auth.currentUser.uid);
-    getDoc(docRef).then((snapshot) => {
-        if (snapshot.exists())
+    function getUserInfos()
+    {
+        if (!isSignedOut)
         {
-            setUser(snapshot.data());
+            const docRef = doc(db, "users", auth.currentUser.uid);
+            getDoc(docRef).then((snapshot) => {
+                if (snapshot.exists())
+                {
+                    setUser(snapshot.data());
+                }
+            })
+                .catch((error) => {
+                    alert(error);
+                })
         }
-    })
-    .catch((error) => {
-        alert(error);
-    })
+    }
 
+    useEffect(() => {
+        getUserInfos();
+    }, []);
 
     return (
         <View style={{flex: 1}}>

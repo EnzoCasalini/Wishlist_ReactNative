@@ -7,21 +7,49 @@ import {
     KeyboardAvoidingView, TouchableOpacity, SafeAreaView, FlatList, ScrollView
 } from "react-native";
 import React, {useEffect} from "react";
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import Contact from "../Component/Contact";
-import {authentication} from "../../firebase/firebase";
-
+import {authentication, db} from "../../firebase/firebase";
+import {collection, getDocs, query, where} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 
 const HomeSignedView = ({navigation}): React.ReactElement => {
 
+    const [lists, setLists] = React.useState([]);
+    const [users, setUsers] = React.useState([]);
+    const auth = getAuth();
+
+    function getLists() {
+        getDocs(collection(db, "list")).then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                //console.log(doc.id, " => ", doc.data());
+                setLists(list => list.concat(doc.data()));
+            });
+        });
+    }
+
+    function getUsers() {
+        const q = query(collection(db, "users"), where( "uid", "!=", auth.currentUser.uid));
+        getDocs(q).then((querySnapshot => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                // console.log(doc.id, " => ", doc.data());
+                setUsers(user => user.concat(doc.data()));
+            });
+        }));
+    }
+
     useEffect(() => {
+        getLists();
+        getUsers();
         authentication.onAuthStateChanged(user => {
             if (!user) {
                 navigation.navigate('SignIn');
             }
         })
-    }, [])
+    }, []);
+
 
     return (
         <ScrollView style={styles.container}>
@@ -33,34 +61,27 @@ const HomeSignedView = ({navigation}): React.ReactElement => {
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                 >
-                    <TouchableOpacity style={styles.eventsButton}>
-                        <Image
-                            source={require("../../assets/img/Birthday.png")}
-                            style={styles.eventsImage}
-                        />
-                        <Text style={styles.eventsText}>Birthday</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.eventsButton}>
-                        <Image
-                            source={require("../../assets/img/Womens.png")}
-                            style={styles.eventsImage}
-                        />
-                        <Text style={styles.eventsText}>Women's Day</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.eventsButton}>
-                        <Image
-                            source={require("../../assets/img/NewYear.png")}
-                            style={styles.eventsImage}
-                        />
-                        <Text style={styles.eventsText}>New year</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.eventsButton}>
-                        <Image
-                            source={require("../../assets/img/Womens.png")}
-                            style={styles.eventsImage}
-                        />
-                        <Text style={styles.eventsText}>Wedding</Text>
-                    </TouchableOpacity>
+                    {lists.map(list => {
+                        if (list == null)
+                        {
+                            return(
+                                <Text>No Lists</Text>
+                            )
+                        }
+                        else {
+                            return(
+                                <TouchableOpacity style={styles.eventsButton} onPress={() => {
+                                    navigation.navigate('List', {listName: list.name});
+                                }} key={list.name}>
+                                    <Image
+                                        source={require("../../assets/img/Birthday.png")}
+                                        style={styles.eventsImage}
+                                    />
+                                    <Text style={styles.eventsText}>{list.name}</Text>
+                                </TouchableOpacity>
+                            )
+                        }
+                    })}
                 </ScrollView>
             </View>
             <View>
@@ -74,12 +95,24 @@ const HomeSignedView = ({navigation}): React.ReactElement => {
             </View>
             <View>
                 <Text style={styles.title}>My Friends</Text>
+
                 <View style={styles.friendsContainer}>
-                    <Contact name={'Romain au cul'} icon={'https://reactnative.dev/img/tiny_logo.png'} status={true}/>
-                    <Contact name={'Enzo ophile'} icon={'https://reactnative.dev/img/tiny_logo.png'} status={true}/>
-                    <Contact name={'Chandler ou minute'} icon={'https://reactnative.dev/img/tiny_logo.png'} status={false}/>
-                    <Contact name={'Gwendal hal'} icon={'https://reactnative.dev/img/tiny_logo.png'} status={true}/>
-                    <Contact name={'Andreas demain'} icon={'https://reactnative.dev/img/tiny_logo.png'} status={true}/>
+                    {users.map(user => {
+                        if (user == null)
+                        {
+                            return(
+                                <Text>No Users</Text>
+                            )
+                        }
+                        else {
+                            return(
+                                <Contact name={user.username} icon={'https://reactnative.dev/img/tiny_logo.png'} status={true}
+                                onPress={() => {
+                                    navigation.navigate('FriendList', {username: user.username});
+                                }} key={user.uid}/>
+                            )
+                        }
+                    })}
                 </View>
             </View>
 

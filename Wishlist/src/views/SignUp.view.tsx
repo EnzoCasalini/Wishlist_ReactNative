@@ -29,7 +29,7 @@ const SignUpView = ({navigation}): React.ReactElement => {
             uid: user.uid,
             profile_picture: user.profile_picture,
         }).then(() => {
-            alert('data updated !');
+            console.log("Signed up");
         }).catch((error) => {
             console.log(error);
         });

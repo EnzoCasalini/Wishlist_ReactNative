@@ -11,6 +11,7 @@ import HomeSignedView from "./src/views/HomeSigned.view";
 import CustomDrawerContent from "./src/Component/CustomDrawerContent";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import WishlistView from "./src/views/Wishlist.view";
+import ListView from "./src/views/List.view";
 
 
 const Drawer = createDrawerNavigator();
@@ -77,6 +78,7 @@ export default function App() {
                 <Stack.Screen name="SignIn" component={SignInView}/>
                 <Stack.Screen name="SignUp" component={SignUpView}/>
                 <Stack.Screen name="HomeSigned" component={MyDrawer}/>
+                <Stack.Screen name="List" component={ListView}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

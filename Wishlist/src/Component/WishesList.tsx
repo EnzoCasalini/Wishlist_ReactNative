@@ -10,7 +10,6 @@ import {
     KeyboardAvoidingView, TouchableOpacity
 } from "react-native";
 import React from "react";
-import {Wish} from "../bdd/Wish";
 
 interface Wish {
     image: string,
@@ -76,9 +75,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         color: "black"
-    },
-    description: {
-
     },
 });
 
