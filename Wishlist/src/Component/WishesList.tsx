@@ -10,20 +10,14 @@ import {
     KeyboardAvoidingView, TouchableOpacity
 } from "react-native";
 import React from "react";
-import {Wish} from "../bdd/Wish";
 
-interface WishesProps {
-    wishes: Wish[],
+interface Wish {
+    image: string,
+    name: string,
+    price: number,
 }
 
-const WishesList: (props: WishesProps) => JSX.Element[] = (props: WishesProps) => {
-
-    function checkDescriptionLength(description:string) {
-        if (description.length > 53)
-            return description.slice(0, 50) + '...';
-        else
-            return description;
-    }
+const WishesList: (props: Wish) => JSX.Element[] = (props: Wish) => {
 
     function checkNameLength(name:string) {
         if (name.length > 18)
@@ -33,22 +27,18 @@ const WishesList: (props: WishesProps) => JSX.Element[] = (props: WishesProps) =
     }
 
     return (
-        props.wishes.map((wish => {
-            return(
-                <View style={styles.wishContainer} key={wish.id}>
-                    <Image
-                        source={{
-                            uri: wish.icon,
-                        }}
-                        style={styles.icon}
-                    />
-                    <View style={styles.infoContainer}>
-                        <Text style={styles.name}>{checkNameLength(wish.name)}</Text>
-                        <Text style={styles.description}>{checkDescriptionLength(wish.description)}</Text>
-                    </View>
-                </View>
-            )
-        }))
+        <View style={styles.wishContainer} key={props.name}>
+            <Image
+                source={{
+                    uri: props.image,
+                }}
+                style={styles.icon}
+            />
+            <View style={styles.infoContainer}>
+                <Text style={styles.name}>{checkNameLength(props.name)}</Text>
+                <Text style={styles.description}>{props.price}</Text>
+            </View>
+        </View>
     )
 
 };
@@ -85,9 +75,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         color: "black"
-    },
-    description: {
-
     },
 });
 

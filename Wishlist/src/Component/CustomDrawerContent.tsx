@@ -3,19 +3,65 @@ import {
     DrawerItemList,
 } from '@react-navigation/drawer';
 
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { getAuth, signOut } from "firebase/auth";
+import { authentication, db } from "../../firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
+
 
 export function CustomDrawerContent(props) {
+
+    const [user, setUser] = React.useState();
+    const [isSignedOut, setIsSignedOut] = React.useState(false);
+
+
+    const auth = getAuth();
+    const handleSignOut = () =>  {
+        signOut(auth).then(() => {
+            console.log("SignedOut");
+            setIsSignedOut(true);
+        }).catch((error) => {
+            //console.log(error);
+        });
+    };
+
+
+    function getUserInfos()
+    {
+        if (!isSignedOut)
+        {
+            const docRef = doc(db, "users", auth.currentUser.uid);
+            getDoc(docRef).then((snapshot) => {
+                if (snapshot.exists())
+                {
+                    setUser(snapshot.data());
+                }
+            })
+                .catch((error) => {
+                    alert(error);
+                })
+        }
+    }
+
+    useEffect(() => {
+        getUserInfos();
+    }, []);
+
     return (
         <View style={{flex: 1}}>
             <DrawerContentScrollView
                 {...props}
                 contentContainerStyle={{backgroundColor: '#545160'}}>
                 <View style={{padding: 20}}>
-                    <Image source={require('../../assets/img/Womens.png')} style={styles.ProfileImage} />
-                    <Text style={styles.title}>John Doe</Text>
+                    <Image source={require("../../assets/PP/default_pp.jpg")} style={styles.ProfileImage} />
+                    <Text style={styles.title}>
+                    {
+                        user != null &&
+                        user.username
+                    }
+                    </Text>
                     <Text style={styles.section}>
                         <Text style={[styles.caption, styles.paragraph]}>80</Text>
                         <Text style={styles.caption}> Following</Text>
@@ -32,7 +78,7 @@ export function CustomDrawerContent(props) {
                         <Text style={{marginLeft: 5, fontSize:15, color:'#fff'}}>Tell a Friend</Text>
                     </View>
                 </TouchableOpacity>*/}
-                <TouchableOpacity onPress={()=>{}} style={{paddingVertical:5}} >
+                <TouchableOpacity onPress={handleSignOut} style={{paddingVertical:5}} >
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <Ionicons name="exit-outline" size={22} color={'#fff'}/>
                         <Text style={{marginLeft: 5, fontSize:15, color:'#fff'}}>Signed Out</Text>

@@ -1,17 +1,27 @@
-
-import { Platform, StyleSheet, Text, TouchableHighlight, TouchableOpacity, TouchableNativeFeedback, TouchableWithoutFeedback, View, Image } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    TextInput,
+    Button,
+    Alert,
+    SafeAreaView,
+    Image,
+    KeyboardAvoidingView, TouchableOpacity
+} from "react-native";
 import React from "react";
 
 interface ContactProps {
     name: string;
     icon: string;
     status: boolean;
+    onPress: () => void;
 }
 
 const Contact: React.FC<ContactProps> = (props: ContactProps) => {
 
     function checkStatus(status:boolean) {
-        if (status)
+        if (status == true)
         {
             return(<Text style={styles.active}>● Active</Text>)
         }
@@ -21,7 +31,8 @@ const Contact: React.FC<ContactProps> = (props: ContactProps) => {
     }
 
     return (
-            <TouchableOpacity style={styles.friendContainer}>
+        <View style={styles.container}>
+            <TouchableOpacity style={styles.friendContainer} onPress={props.onPress}>
                 <Image
                     source={{
                         uri: props.icon,
@@ -33,31 +44,27 @@ const Contact: React.FC<ContactProps> = (props: ContactProps) => {
                     {checkStatus(props.status)}
                 </View>
             </TouchableOpacity>
+        </View>
     )
+
 };
 
 const styles = StyleSheet.create({
+    container: {
+        width: "100%"
+    },
     friendContainer: {
         display: 'flex',
         justifyContent: "flex-start",
         alignItems: 'center',
         flexDirection: 'row',
         height: 110,
-        width: '95%',
+        width: '90%',
         paddingLeft: 10,
-        borderRadius: 8,
+        borderRadius: 10,
         borderColor: 'black',
-        marginBottom: 10,
-        backgroundColor: '#545160',
-        // Shadow
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.22,
-        shadowRadius: 2.22,
-        elevation: 3,
+        borderWidth: 2,
+        backgroundColor: '#FFE9F3',
     },
     icon: {
         width: 80,
@@ -72,15 +79,16 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 20,
-        color: '#E5E5E5',
+        fontWeight: "bold",
+        color: "black"
     },
     active: {
         fontSize: 14,
-        color: '#C9B6E9',
+        color: '#00AF54',
     },
     offline: {
         fontSize: 14,
-        color: '#b0b0b0',
+        color: 'grey',
     },
 });
 
