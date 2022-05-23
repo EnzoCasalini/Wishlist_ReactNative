@@ -41,7 +41,7 @@ const FriendView = ({ route, navigation }): React.ReactElement => {
             <View>
                 <Text style={styles.title}>{username}</Text>
             </View>
-            <View>
+            <View style={styles.wishesContainer}>
                 {wishes.map(wish => {
                     if (wish == null)
                     {
@@ -73,6 +73,10 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         paddingTop: 20,
         color: '#fff',
+    },
+    wishesContainer: {
+        display: "flex",
+        alignItems: "center",
     },
 });
 
