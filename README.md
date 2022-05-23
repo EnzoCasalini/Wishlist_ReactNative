@@ -22,7 +22,7 @@ Cette application est une wishlist qui met en lumière plusieurs fonctionnalité
 ![image](https://user-images.githubusercontent.com/84391974/169863106-64cbd752-c609-4e10-8200-b4d212f543a5.png)
 ### Page Home
 ![image](https://user-images.githubusercontent.com/84391974/169865284-a3aa7fff-7ecf-4e16-ab69-eddd753d93cd.png)
-![image](https://user-images.githubusercontent.com/84391974/169866521-f0fe1155-e54a-4870-baac-eae2081a0748.png)
+![image](https://user-images.githubusercontent.com/84391974/169866557-1cb912a3-12bb-443d-825f-9da865ee402b.png)
 ### Page Wishes
 ![image](https://user-images.githubusercontent.com/84391974/169865497-2a292f6c-ff14-4584-ad03-2a13252b2030.png)
 ### Add a wish
