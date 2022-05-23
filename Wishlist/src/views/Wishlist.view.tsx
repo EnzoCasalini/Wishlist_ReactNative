@@ -103,7 +103,7 @@ const WishlistView = ({navigation}): React.ReactElement => {
 
     return (
         <ScrollView style={styles.container}>
-            <View>
+            <View style={styles.wishesContainer}>
                 <Text style={styles.title}>My wishes</Text>
                 {wishes.map(wish => {
                     if (wish == null)
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     buttonWish: {
         backgroundColor: "#c8b6e8",
         marginTop: 30,
-        marginLeft: 10,
+        marginLeft: 25,
         paddingVertical: 15,
         borderRadius: 10,
         width: 150,
@@ -198,6 +198,10 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: "#fff",
+    },
+    wishesContainer: {
+        display: "flex",
+        alignItems: "center",
     },
 });
 
