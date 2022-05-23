@@ -2,6 +2,7 @@
 
 Une application réalisée en React Native à l'aide d'Expo et de Firebase, en binôme avec Romain Magana [https://github.com/RomainMagana],
 qui nous sert de projet de fin d'année pour notre module *"Technologies WEB et Base de données"*.
+
 **NB**: Cette application a été réalisée en **une semaine**, elle n'est donc qu'à l'étape POC (Proof Of Concept).
 
 ## But de l'application
