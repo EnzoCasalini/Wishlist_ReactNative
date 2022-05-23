@@ -1,0 +1,25 @@
+{
+  "name": "scraping-api",
+  "version": "1.0.0",
+  "description": "A RESTful API that scrapes the internet for a wishlist",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "nodejs",
+    "wishlist",
+    "wishees"
+  ],
+  "author": "romain.magana@hotmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.11",
+    "express": "^4.18.1",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "puppeteer": "^14.1.1"
+  }
+}
