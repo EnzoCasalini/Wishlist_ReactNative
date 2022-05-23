@@ -8,7 +8,7 @@ import React, {useEffect} from "react";
 import { db } from "../../firebase/firebase";
 import {query, where, setDoc, doc, addDoc} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc } from "firebase/firestore";
 import WishesList from "../Component/WishesList";
 import { Button } from "../Component/Button";
 import { Modal } from "../Component/Modal";
@@ -34,9 +34,9 @@ const WishlistView = ({navigation}): React.ReactElement => {
             console.log("encoded :" + encodedUrl);
             const response = await fetch(`http://localhost:8080/?url=${encodedUrl}/`);
             const data = await response.json(); // On récupère les infos de l'API.
-            console.log("DATA : " + data.title);
-            console.log("DATA : " + data.price);
-            console.log("DATA : " + data.image);
+            // console.log("DATA : " + data.title);
+            // console.log("DATA : " + data.price);
+            // console.log("DATA : " + data.image);
 
             return data;
         }
@@ -84,6 +84,7 @@ const WishlistView = ({navigation}): React.ReactElement => {
     }
 
 
+
     function getWishes() {
         setWishes([]);
         const q = query(collection(db, "wishes"), where("uid", "==", auth.currentUser.uid));
@@ -99,9 +100,6 @@ const WishlistView = ({navigation}): React.ReactElement => {
         getWishes();
     }, []);
 
-    function test() {
-        console.log(api);
-    }
 
     return (
         <ScrollView style={styles.container}>
@@ -122,7 +120,7 @@ const WishlistView = ({navigation}): React.ReactElement => {
                 })}
             </View>
             <View>
-                <TouchableOpacity onPress={popUpModal}><Text>Make it pop!</Text></TouchableOpacity>
+                <TouchableOpacity onPress={popUpModal} style={styles.buttonWish}><Text style={styles.buttonText}>Ajoutez un vœu !</Text></TouchableOpacity>
                 <Modal isVisible={isModalVisible}>
                     <Modal.Container>
                         <View style={styles.modal}>
@@ -143,9 +141,6 @@ const WishlistView = ({navigation}): React.ReactElement => {
                         </View>
                     </Modal.Container>
                 </Modal>
-                <TouchableOpacity onPress={test}>
-                    <Text>Click Me Boy !</Text>
-                </TouchableOpacity>
             </View>
         </ScrollView>
     )
@@ -191,6 +186,18 @@ const styles = StyleSheet.create({
         height: "90%",
         alignItems: "center",
         justifyContent: "center",
+    },
+    buttonWish: {
+        backgroundColor: "#c8b6e8",
+        marginTop: 30,
+        marginLeft: 10,
+        paddingVertical: 15,
+        borderRadius: 10,
+        width: 150,
+        alignItems: "center",
+    },
+    buttonText: {
+        color: "#fff",
     },
 });
 
